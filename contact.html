@@ -485,6 +485,7 @@
                             method="POST"
                           >
                             <div class="row gx-3">
+                              <!-- Your existing form fields -->
                               <div class="col-md-6">
                                 <div class="mb-4">
                                   <label class="form-label">Name</label>
@@ -554,6 +555,7 @@
                                   ></textarea>
                                 </div>
                               </div>
+                              <!-- ... -->
                               <div class="col-md-12">
                                 <button class="submit-btn" type="submit">
                                   Send Message
@@ -584,6 +586,52 @@
                               </div>
                             </div>
                           </form>
+
+                          <!-- Add a success/error message container -->
+                          <div
+                            id="form-message"
+                            style="display: none; margin-top: 20px"
+                          ></div>
+
+                          <script>
+                            document
+                              .getElementById("contact-form")
+                              .addEventListener("submit", function (e) {
+                                e.preventDefault();
+
+                                // You can add form validation here if needed
+
+                                // Submit form via AJAX
+                                const form = e.target;
+                                const formData = new FormData(form);
+                                const messageContainer =
+                                  document.getElementById("form-message");
+
+                                fetch(form.action, {
+                                  method: "POST",
+                                  body: formData,
+                                })
+                                  .then((response) => response.text())
+                                  .then((data) => {
+                                    // Show success message
+                                    messageContainer.style.display = "block";
+                                    messageContainer.innerHTML =
+                                      "Thank you! Your message has been sent. You will receive a reply shortly.";
+                                    messageContainer.style.color = "green";
+
+                                    // Reset form
+                                    form.reset();
+                                  })
+                                  .catch((error) => {
+                                    // Show error message
+                                    messageContainer.style.display = "block";
+                                    messageContainer.innerHTML =
+                                      "There was an error sending your message. Please try again later.";
+                                    messageContainer.style.color = "red";
+                                  });
+                              });
+                          </script>
+
                           <p class="ajax-response mb-0"></p>
                         </div>
                       </div>

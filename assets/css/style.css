@@ -417,9 +417,9 @@ p {
 }
 
 .profile-card .image {
-	background-color: var(--background);
-	border-radius: 8px;
-	overflow: hidden;
+  background-color: white; /* Forces white background */
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .profile-card .image img {
